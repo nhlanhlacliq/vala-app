@@ -3,28 +3,29 @@
     "name": "vala-app",
     "slug": "vala-app",
     "version": "1.0.0",
-
+    "scheme": "vala",
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
-
     "experiments": {
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "typedRoutes": true
     },
-
-    "plugins": [],
-
+    "plugins": [
+      ["expo-router", { "root": "src/app" }]
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
