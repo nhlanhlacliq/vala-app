@@ -26,7 +26,7 @@ export default function MainTabsLayout() {
       />
       <Tabs.Screen
         name="transfer/index"
-        options={{ title: 'Transfer', tabBarIcon: ({ color }) => <ArrowLeftRight size={20} color={color} /> }}
+        options={{ title: 'Transact', tabBarIcon: ({ color }) => <ArrowLeftRight size={20} color={color} /> }}
       />
       <Tabs.Screen
         name="settings/index"

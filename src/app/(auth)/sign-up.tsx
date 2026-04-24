@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native';
+import { router } from 'expo-router';
+import SignUpScreen from '@/features/auth/screens/SignUpScreen';
 
 export default function SignUpRoute() {
   return (
-    <View className="flex-1 bg-white items-center justify-center">
-      <Text>Sign Up — coming soon</Text>
-    </View>
+    <SignUpScreen
+      onBack={() => router.back()}
+      onSignUp={() => router.replace('/(main)/home')}
+    />
   );
 }

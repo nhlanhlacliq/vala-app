@@ -1,11 +1,23 @@
-import { useLocalSearchParams } from 'expo-router';
-import { View, Text } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import WalletDetailScreen from '@/features/wallet/screens/WalletDetailScreen';
 
-export default function WalletDetailScreen() {
+const MOCK: Record<string, { name: string; balance: number }> = {
+  '1': { name: "Parent's house", balance: 3400 },
+  '2': { name: "Kid's stationary", balance: 850 },
+  '3': { name: 'Car maintenance', balance: 1890 },
+};
+
+export default function WalletDetailRoute() {
   const { walletId } = useLocalSearchParams<{ walletId: string }>();
+  const wallet = MOCK[walletId] ?? { name: 'Wallet', balance: 0 };
+
   return (
-    <View className="flex-1 bg-white items-center justify-center">
-      <Text>Wallet {walletId} — coming soon</Text>
-    </View>
+    <WalletDetailScreen
+      walletId={walletId}
+      walletName={wallet.name}
+      balance={wallet.balance}
+      onBack={() => router.back()}
+      onDeposit={() => router.push('/(main)/transfer/deposit/amount')}
+    />
   );
 }

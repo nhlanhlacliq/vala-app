@@ -1,47 +1,48 @@
-import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, Image, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Button from '@/components/Button/Button';
+
+const clipPath = require('../../../../assets/Clip path group.png');
+const logoMark = require('../../../../assets/vala-logo.png');
+const logoWord = require('../../../../assets/vala-word.png');
 
 type Props = {
-  onGetStarted: () => void;
+  readonly onGetStarted: () => void;
 };
 
 export default function SplashScreen({ onGetStarted }: Props) {
   return (
     <View className="flex-1 bg-cyan-400">
       <StatusBar barStyle="light-content" backgroundColor="#22d3ee" />
-      <SafeAreaView className="flex-1 justify-between px-8 pb-10">
 
-        {/* Logo */}
-        <View className="flex-1 items-center justify-center gap-3">
-          <ValaLogo />
-          <Text className="text-white text-xs tracking-[4px] font-medium mt-1">
-            PLAN BETTER, LIVE BETTER
-          </Text>
+      {/* Decorative background overlay */}
+      <Image
+        source={clipPath}
+        style={{ position: 'absolute', width: '100%', height: '100%' }}
+        resizeMode="cover"
+      />
+
+      <SafeAreaView className="flex-1 justify-between px-8 pb-10">
+        <View className="flex-1 flex-row items-center justify-center gap-4">
+          <Image source={logoMark} style={{ width: 91, height: 91 }} resizeMode="contain" />
+          <View className="flex items-start gap-1.5">
+            <Image source={logoWord} style={{ width: 180, height: 44 }} resizeMode="contain" />
+            <Text className="mt-1 text-xs font-medium tracking-[2px] text-white">
+              PLAN BETTER, LIVE BETTER
+            </Text>
+          </View>
         </View>
 
-        {/* Get Started button */}
-        <TouchableOpacity
-          onPress={onGetStarted}
-          className="bg-white rounded-full flex-row items-center justify-between px-6 py-4"
-          activeOpacity={0.85}
-        >
-          <Text className="text-gray-900 text-base font-semibold">Get started</Text>
-          <Text className="text-gray-900 text-base font-semibold">→</Text>
-        </TouchableOpacity>
-
+        <View className="ml-auto">
+          <Button
+            label="Get started"
+            onPress={onGetStarted}
+            variant="outline"
+            fullWidth={false}
+            className="gap-10"
+          />
+        </View>
       </SafeAreaView>
-    </View>
-  );
-}
-
-function ValaLogo() {
-  return (
-    <View className="items-center gap-2">
-      {/* Star / asterisk mark */}
-      <View className="w-14 h-14 items-center justify-center">
-        <Text className="text-white text-5xl font-thin">✳</Text>
-      </View>
-      <Text className="text-white text-5xl font-bold tracking-widest">VALA</Text>
     </View>
   );
 }

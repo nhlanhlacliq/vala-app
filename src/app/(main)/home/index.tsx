@@ -1,9 +1,12 @@
-import { View, Text } from 'react-native';
+import { router } from 'expo-router';
+import HomeScreen from '@/features/home/screens/HomeScreen';
+import { type Wallet } from '@/features/home/components/WalletListItem';
 
-export default function HomeScreen() {
+export default function HomeRoute() {
   return (
-    <View className="flex-1 bg-gray-100 items-center justify-center">
-      <Text>Home — coming soon</Text>
-    </View>
+    <HomeScreen
+      onWalletPress={(wallet: Wallet) => router.push(`/(main)/home/${wallet.id}`)}
+      onAddWallet={() => router.push('/(main)/transfer/create-wallet/intro')}
+    />
   );
 }
