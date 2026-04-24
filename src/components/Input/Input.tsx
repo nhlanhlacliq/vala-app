@@ -24,9 +24,9 @@ export default function Input({
   const [visible, setVisible] = useState(false);
 
   return (
-    <View className="flex-row items-center border border-gray-200 rounded-xl px-4 py-3.5 bg-white">
+    <View className="flex-row items-center rounded-xl border border-gray-200 bg-white px-4 py-1">
       <TextInput
-        className="flex-1 text-base text-gray-900"
+        className="flex-1 text-[15px] text-gray-900"
         placeholder={placeholder}
         placeholderTextColor="#9CA3AF"
         value={value}
@@ -37,12 +37,8 @@ export default function Input({
         autoComplete={autoComplete}
       />
       {secureTextEntry && (
-        <TouchableOpacity onPress={() => setVisible(v => !v)} hitSlop={8}>
-          {visible ? (
-            <Eye size={18} color="#9CA3AF" />
-          ) : (
-            <EyeOff size={18} color="#9CA3AF" />
-          )}
+        <TouchableOpacity onPress={() => setVisible((v) => !v)} hitSlop={8}>
+          {visible ? <Eye size={18} color="#9CA3AF" /> : <EyeOff size={18} color="#9CA3AF" />}
         </TouchableOpacity>
       )}
     </View>

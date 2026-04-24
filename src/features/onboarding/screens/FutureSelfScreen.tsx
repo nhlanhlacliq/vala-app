@@ -1,6 +1,8 @@
 import { Text } from 'react-native';
 import OnboardingSlide from '../components/OnboardingSlide';
 
+const image = require('../../../../assets/onb-3.png');
+
 type Props = {
   onNext: () => void;
 };
@@ -8,16 +10,11 @@ type Props = {
 export default function FutureSelfScreen({ onNext }: Props) {
   return (
     <OnboardingSlide
-      photoColor="#164e63"
+      image={image}
       title="YOUR FUTURE SELF WILL THANK YOU"
       activeIndex={2}
       totalSlides={3}
       onNext={onNext}
-      nextLabel="Next"
-    >
-      <Text className="text-gray-600 text-base leading-6">
-        Start saving today and unlock your funds when you need them most — in November or December.
-      </Text>
-    </OnboardingSlide>
+      nextLabel="Next"></OnboardingSlide>
   );
 }

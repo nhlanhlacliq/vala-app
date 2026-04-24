@@ -32,34 +32,31 @@ export default function SignUpScreen({ onBack, onSignUp }: Props) {
   });
 
   const set = (key: keyof SignUpData) => (val: string | boolean) =>
-    setForm(f => ({ ...f, [key]: val }));
+    setForm((f) => ({ ...f, [key]: val }));
 
   const canSubmit =
-    form.firstName.trim() &&
-    form.lastName.trim() &&
-    form.email.trim() &&
-    form.idPassport.trim() &&
-    form.password.length >= 6 &&
-    form.password === form.confirmPassword &&
+    // form.firstName.trim() &&
+    // form.lastName.trim() &&
+    // form.email.trim() &&
+    // form.idPassport.trim() &&
+    // form.password.length >= 6 &&
+    // form.password === form.confirmPassword &&
     form.agreedToTerms;
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView
         className="flex-1"
-        contentContainerClassName="px-6 pb-10"
+        contentContainerClassName="px-6 pb-10 min-h-full"
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Header */}
         <TouchableOpacity onPress={onBack} hitSlop={8} className="py-5">
           <ArrowLeft size={22} color="#111" />
         </TouchableOpacity>
 
-        <Text className="text-3xl font-bold text-gray-900 mb-2">
-          Create your Vala account
-        </Text>
-        <Text className="text-gray-500 text-base mb-8">
+        <Text className="mb-2 text-3xl font-bold text-gray-900">Create your Vala account</Text>
+        <Text className="mb-8 text-base text-gray-500">
           Create an account so you can manage your money even faster
         </Text>
 
@@ -113,21 +110,19 @@ export default function SignUpScreen({ onBack, onSignUp }: Props) {
         {/* T&Cs */}
         <TouchableOpacity
           onPress={() => set('agreedToTerms')(!form.agreedToTerms)}
-          className="flex-row items-start gap-3 mt-6 mb-8"
-          activeOpacity={0.7}
-        >
+          className="mb-8 mt-6 flex-row items-start gap-3"
+          activeOpacity={0.7}>
           <View
-            className={`w-5 h-5 rounded border mt-0.5 items-center justify-center ${
-              form.agreedToTerms ? 'bg-cyan-400 border-cyan-400' : 'border-gray-400'
-            }`}
-          >
-            {form.agreedToTerms && <Text className="text-white text-xs font-bold">✓</Text>}
+            className={`mt-0.5 h-5 w-5 items-center justify-center rounded border ${
+              form.agreedToTerms ? 'border-cyan-400 bg-cyan-400' : 'border-gray-400'
+            }`}>
+            {form.agreedToTerms && <Text className="text-xs font-bold text-white">✓</Text>}
           </View>
           <View className="flex-1">
-            <Text className="text-gray-700 text-sm leading-5">
+            <Text className="text-sm leading-5 text-gray-700">
               I'm at least 18 years old and agree to the following terms:
             </Text>
-            <Text className="text-gray-700 text-sm leading-5 mt-1">
+            <Text className="mt-1 text-sm leading-5 text-gray-700">
               By clicking here, I have read and agree to the{' '}
               <Text className="font-bold">Terms and Conditions</Text>
             </Text>
@@ -138,6 +133,8 @@ export default function SignUpScreen({ onBack, onSignUp }: Props) {
           label="Sign Up"
           onPress={() => onSignUp(form)}
           disabled={!canSubmit}
+          fullWidth={false}
+          className="mt-auto self-end"
         />
       </ScrollView>
     </SafeAreaView>

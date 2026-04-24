@@ -34,13 +34,7 @@ export default function SplashScreen({ onGetStarted }: Props) {
         </View>
 
         <View className="ml-auto">
-          <Button
-            label="Get started"
-            onPress={onGetStarted}
-            variant="outline"
-            fullWidth={false}
-            className="gap-10"
-          />
+          <Button label="Get started" onPress={onGetStarted} variant="outline" fullWidth={false} />
         </View>
       </SafeAreaView>
     </View>

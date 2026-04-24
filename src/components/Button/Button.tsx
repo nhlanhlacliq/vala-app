@@ -24,7 +24,7 @@ export default function Button({
   fullWidth = true,
   className,
 }: Props) {
-  const base = `rounded-full flex-row items-center px-6 py-4 ${fullWidth ? 'justify-between' : 'gap-3 self-start'}`;
+  const base = `rounded-full flex-row items-center px-6 py-2 text-[16px] ${fullWidth ? 'justify-between' : 'gap-10 self-start'}`;
 
   const variantClasses: Record<Variant, string> = {
     primary: disabled ? 'bg-gray-300' : 'bg-cyan-400',
@@ -33,15 +33,17 @@ export default function Button({
   };
 
   const textClasses: Record<Variant, string> = {
-    primary: disabled ? 'text-gray-500 font-semibold text-sm' : 'text-white font-semibold text-sm',
-    outline: 'text-gray-900 font-semibold text-sm',
-    ghost: 'text-gray-500 text-sm',
+    primary: disabled
+      ? 'text-gray-500 font-semibold text-[16px]'
+      : 'text-white font-semibold text-[16px]',
+    outline: 'text-gray-900 font-semibold text-[16px]',
+    ghost: 'text-gray-500 text-[16px]',
   };
 
-  const iconClasses: Record<Variant, string> = {
-    primary: disabled ? 'text-gray-500' : 'text-white',
-    outline: 'text-gray-900',
-    ghost: 'text-gray-500',
+  const iconColor: Record<Variant, string> = {
+    primary: disabled ? 'gray' : 'white',
+    outline: 'black',
+    ghost: 'gray',
   };
 
   return (
@@ -52,7 +54,7 @@ export default function Button({
       className={`${base} ${variantClasses[variant]} ${className || ''}`}>
       {icon && <View className="mr-1">{icon}</View>}
       <Text className={textClasses[variant]}>{label}</Text>
-      {showArrow && <Feather name="arrow-right" size={22} className={iconClasses[variant]} />}
+      {showArrow && <Feather name="arrow-right" size={22} color={iconColor[variant]} />}
     </TouchableOpacity>
   );
 }
