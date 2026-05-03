@@ -1,8 +1,28 @@
+import QuickActionsSheet from '@/features/home/components/QuickActionsSheet';
+import { Tabs, router } from 'expo-router';
+import { ArrowLeftRight, Home, Settings } from 'lucide-react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Tabs, router } from 'expo-router';
-import { Home, ArrowLeftRight, Settings } from 'lucide-react-native';
-import QuickActionsSheet from '@/features/home/components/QuickActionsSheet';
+
+const HIDDEN_SCREENS = [
+  'home/[walletId]',
+  'transfer/from-to',
+  'transfer/transfer-details',
+  'transfer/transfer-confirmation',
+  'transfer/deposit/amount',
+  'transfer/deposit/method',
+  'transfer/deposit/details',
+  'transfer/deposit/confirmation',
+  'transfer/create-wallet/intro',
+  'transfer/create-wallet/goal',
+  'transfer/create-wallet/review',
+  'transfer/create-wallet/confirmation',
+  'transfer/withdraw/source',
+  'transfer/withdraw/amount',
+  'transfer/withdraw/bank',
+  'transfer/withdraw/details',
+  'transfer/withdraw/confirmation',
+];
 
 export default function MainTabsLayout() {
   const [sheetVisible, setSheetVisible] = useState(false);
@@ -18,8 +38,13 @@ export default function MainTabsLayout() {
             borderRadius: 40,
             marginHorizontal: 16,
             marginBottom: 16,
-            height: 64,
+            height: 72,
             position: 'absolute',
+            paddingTop: 8,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            // position: "relative",
           },
           tabBarActiveTintColor: '#22d3ee',
           tabBarInactiveTintColor: '#ffffff',
@@ -44,6 +69,10 @@ export default function MainTabsLayout() {
           name="settings/index"
           options={{ title: 'Settings', tabBarIcon: ({ color }) => <Settings size={20} color={color} /> }}
         />
+
+        {HIDDEN_SCREENS.map((name) => (
+          <Tabs.Screen key={name} name={name} options={{ href: null }} />
+        ))}
       </Tabs>
 
       <QuickActionsSheet

@@ -11,19 +11,14 @@ export type WalletOption = {
   balance: number;
 };
 
-const WALLETS: WalletOption[] = [
-  { id: '1', name: "Parent's house", balance: 3400 },
-  { id: '2', name: "Kid's stationary", balance: 850 },
-  { id: '3', name: 'Car maintenance', balance: 1890 },
-];
-
 type Props = {
+  wallets: WalletOption[];
   onBack: () => void;
   onNext: (from: WalletOption, to: WalletOption) => void;
   onCancel: () => void;
 };
 
-export default function TransferSelectScreen({ onBack, onNext, onCancel }: Props) {
+export default function TransferSelectScreen({ wallets, onBack, onNext, onCancel }: Props) {
   const [from, setFrom] = useState<WalletOption | null>(null);
   const [to, setTo] = useState<WalletOption | null>(null);
   const [picking, setPicking] = useState<'from' | 'to' | null>(null);
@@ -37,7 +32,7 @@ export default function TransferSelectScreen({ onBack, onNext, onCancel }: Props
   };
 
   const available = (slot: 'from' | 'to') =>
-    WALLETS.filter(w => {
+    wallets.filter(w => {
       if (slot === 'from') return !to || w.id !== to.id;
       return !from || w.id !== from.id;
     });
@@ -71,7 +66,6 @@ export default function TransferSelectScreen({ onBack, onNext, onCancel }: Props
         </View>
       </View>
 
-      {/* Wallet picker sheet */}
       <Modal visible={!!picking} transparent animationType="slide" onRequestClose={() => setPicking(null)}>
         <Pressable className="flex-1 bg-black/40" onPress={() => setPicking(null)} />
         <View className="bg-white rounded-t-3xl px-5 pt-6 pb-10">

@@ -1,52 +1,79 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Bell, EyeOff, Eye } from 'lucide-react-native';
+import Button from '@/components/Button/Button';
 import ValaLogo from '@/components/ValaLogo/ValaLogo';
+import { Bell, Eye, EyeOff, X } from 'lucide-react-native';
+import { useState } from 'react';
+import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import SavingsCard from '../components/SavingsCard';
 import WalletListItem, { type Wallet } from '../components/WalletListItem';
-import Button from '@/components/Button/Button';
 
-const MOCK_WALLETS: Wallet[] = [
-  { id: '1', name: "Parent's house", balance: 3400 },
-  { id: '2', name: "Kid's stationary", balance: 850 },
-  { id: '3', name: 'Car maintenance', balance: 1890 },
-];
-
-const SAVINGS_TOTAL = MOCK_WALLETS.reduce((sum, w) => sum + w.balance, 0);
+const MOCK_NOTIFICATIONS = ['Withdrawing facilities now available!'];
 
 type Props = {
   userName?: string;
+  accountNumber?: string;
+  wallets: Wallet[];
+  isLoading?: boolean;
   onWalletPress: (wallet: Wallet) => void;
   onAddWallet: () => void;
 };
 
-export default function HomeScreen({ userName = 'John', onWalletPress, onAddWallet }: Props) {
+export default function HomeScreen({
+  userName = 'John',
+  accountNumber,
+  wallets,
+  isLoading = false,
+  onWalletPress,
+  onAddWallet,
+}: Props) {
   const [walletsHidden, setWalletsHidden] = useState(false);
+  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
 
-  const wallets = MOCK_WALLETS;
   const hasWallets = wallets.length > 0;
+  const hasNotifications = notifications.length > 0;
+  const savingsTotal = wallets.reduce((sum, w) => sum + w.balance, 0);
+
+  const dismissNotification = (index: number) =>
+    setNotifications(n => n.filter((_, i) => i !== index));
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
       <ScrollView
         className="flex-1"
-        contentContainerClassName="px-5 pb-32"
+        contentContainerClassName="px-5 pb-32 pt-8"
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View className="items-center py-4">
-          <ValaLogo size="sm" color="cyan" />
+        <View className="items-center py-4 mb-4">
+          <ValaLogo size="xs" />
         </View>
 
         <View className="flex-row items-center justify-between mb-5">
           <Text className="text-lg font-semibold text-gray-900">Welcome, {userName}</Text>
-          <TouchableOpacity hitSlop={8}>
-            <Bell size={22} color="#111" />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity hitSlop={8}>
+              <Bell size={22} className={hasNotifications ? "text-red-500" : "text-gray-500"} />
+            </TouchableOpacity>
+            {hasNotifications && (
+              <View className="absolute -top-0 right-0.5 w-2.5 h-2.5 rounded-full bg-red-500 border border-white" />
+            )}
+          </View>
         </View>
 
-        <SavingsCard total={SAVINGS_TOTAL} />
+        {/* Notification banners */}
+        {notifications.map((message, index) => (
+          <View
+            key={index}
+            className="flex-row items-center justify-between bg-cyan-400 rounded-2xl px-4 py-3 mb-4"
+          >
+            <Text className="text-white text-sm font-medium flex-1">{message}</Text>
+            <TouchableOpacity onPress={() => dismissNotification(index)} hitSlop={8} className="ml-3">
+              <X size={16} color="#fff" />
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        <SavingsCard total={savingsTotal} accountNumber={accountNumber} />
 
         {/* My Wallets */}
         <View className="flex-row items-center justify-between mb-4">
@@ -56,7 +83,9 @@ export default function HomeScreen({ userName = 'John', onWalletPress, onAddWall
           </TouchableOpacity>
         </View>
 
-        {!walletsHidden && (
+        {isLoading ? (
+          <ActivityIndicator color="#22d3ee" className="my-6" />
+        ) : !walletsHidden && (
           hasWallets ? (
             <View>
               {wallets.map(wallet => (
@@ -72,8 +101,8 @@ export default function HomeScreen({ userName = 'John', onWalletPress, onAddWall
           )
         )}
 
-        <View className="mt-4">
-          <Button label="Add a wallet" onPress={onAddWallet} />
+        <View className="mt-4 ml-auto">
+          <Button label="Add a wallet" onPress={onAddWallet} fullWidth={false} />
         </View>
       </ScrollView>
     </SafeAreaView>

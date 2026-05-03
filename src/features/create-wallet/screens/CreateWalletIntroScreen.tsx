@@ -1,8 +1,37 @@
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Lock, TrendingUp, Bell } from 'lucide-react-native';
+import Svg, { Path, Circle, Ellipse } from 'react-native-svg';
 import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
 import Button from '@/components/Button/Button';
+
+function PiggyBankIllustration() {
+  return (
+    <Svg width={80} height={80} viewBox="0 0 80 80" fill="none">
+      {/* Body */}
+      <Ellipse cx="38" cy="46" rx="26" ry="22" stroke="#22d3ee" strokeWidth="2.5" fill="none" />
+      {/* Head */}
+      <Circle cx="62" cy="34" r="12" stroke="#22d3ee" strokeWidth="2.5" fill="none" />
+      {/* Snout */}
+      <Ellipse cx="67" cy="38" rx="5" ry="3.5" stroke="#22d3ee" strokeWidth="2" fill="none" />
+      <Circle cx="65.5" cy="38" r="1" fill="#22d3ee" />
+      <Circle cx="68.5" cy="38" r="1" fill="#22d3ee" />
+      {/* Eye */}
+      <Circle cx="59" cy="30" r="1.5" fill="#22d3ee" />
+      {/* Ear */}
+      <Path d="M56 24 Q54 18 60 20 Q62 24 58 26 Z" stroke="#22d3ee" strokeWidth="2" fill="none" />
+      {/* Coin slot */}
+      <Path d="M34 24 Q38 22 42 24" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Legs */}
+      <Path d="M22 64 L20 72" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+      <Path d="M30 67 L29 75" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+      <Path d="M46 67 L47 75" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+      <Path d="M54 64 L56 72" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Tail */}
+      <Path d="M12 42 Q6 38 10 32 Q14 26 12 22" stroke="#22d3ee" strokeWidth="2" fill="none" strokeLinecap="round" />
+    </Svg>
+  );
+}
 
 type Props = {
   onBack: () => void;
@@ -30,7 +59,7 @@ export default function CreateWalletIntroScreen({ onBack, onNext, onCancel }: Pr
           <Text className="text-gray-500 text-sm text-center mb-4">
             Create a new wallet and access your money in November or December
           </Text>
-          <Text className="text-6xl">🐷</Text>
+          <PiggyBankIllustration />
         </View>
 
         <Text className="text-gray-900 font-semibold mb-4">Why use VALA?</Text>

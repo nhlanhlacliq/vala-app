@@ -5,8 +5,8 @@ export default function WithdrawConfirmationRoute() {
   return (
     <WithdrawConfirmationScreen
       onBack={() => router.back()}
-      onComplete={() => router.dismissTo('/(main)/home')}
-      onCancel={() => router.dismissTo('/(main)/home')}
+      onComplete={() => router.navigate('/(main)/home')}
+      onCancel={() => router.navigate('/(main)/home')}
     />
   );
 }

@@ -16,7 +16,7 @@ export default function TransferDetailsRoute() {
       to={to}
       onBack={() => router.back()}
       onNext={() => router.push('/(main)/transfer/transfer-confirmation')}
-      onCancel={() => router.dismissTo('/(main)/home')}
+      onCancel={() => router.navigate('/(main)/home')}
     />
   );
 }

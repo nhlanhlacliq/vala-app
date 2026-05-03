@@ -9,12 +9,13 @@ type Props = {
   source: WithdrawSource;
   amount: number;
   bank: BankAccount;
+  isLoading?: boolean;
   onBack: () => void;
   onNext: () => void;
   onCancel: () => void;
 };
 
-export default function WithdrawDetailsScreen({ source, amount, bank, onBack, onNext, onCancel }: Props) {
+export default function WithdrawDetailsScreen({ source, amount, bank, isLoading = false, onBack, onNext, onCancel }: Props) {
   const date = new Date().toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const rows: [string, string][] = [
@@ -39,7 +40,7 @@ export default function WithdrawDetailsScreen({ source, amount, bank, onBack, on
 
         <View className="flex-row gap-4">
           <View className="flex-1">
-            <Button label="Next" onPress={onNext} />
+            <Button label={isLoading ? 'Processing...' : 'Next'} onPress={onNext} disabled={isLoading} />
           </View>
           <View className="flex-1">
             <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} />

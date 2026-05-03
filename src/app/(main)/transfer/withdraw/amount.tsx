@@ -18,7 +18,7 @@ export default function WithdrawAmountRoute() {
           params: { sourceId, sourceName, sourceBalance, amount: String(amount) },
         })
       }
-      onCancel={() => router.dismissTo('/(main)/home')}
+      onCancel={() => router.navigate('/(main)/home')}
     />
   );
 }

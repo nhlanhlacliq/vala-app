@@ -1,6 +1,6 @@
+import { Eye, EyeOff } from 'lucide-react-native';
 import { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { EyeOff, Eye } from 'lucide-react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   total: number;
@@ -18,7 +18,7 @@ export default function SavingsCard({ total, accountNumber = '123 123 123 34' }:
           {hidden ? <Eye size={18} color="#9CA3AF" /> : <EyeOff size={18} color="#9CA3AF" />}
         </TouchableOpacity>
       </View>
-      <Text className="text-gray-400 text-sm mb-3">Account {accountNumber}</Text>
+      {/* <Text className="text-gray-400 text-sm mb-3">Account {accountNumber}</Text> */}
 
       <View className="bg-white rounded-2xl border border-gray-200 px-5 py-5">
         <Text className="text-4xl font-bold text-gray-900">

@@ -5,6 +5,7 @@ import Button from '@/components/Button/Button';
 
 type Props = {
   amount: number;
+  isLoading?: boolean;
   onBack: () => void;
   onNext: () => void;
   onCancel: () => void;
@@ -13,7 +14,7 @@ type Props = {
 const VALA_FEE = 10;
 const VAT_RATE = 0.15;
 
-export default function PaymentDetailsScreen({ amount, onBack, onNext, onCancel }: Props) {
+export default function PaymentDetailsScreen({ amount, isLoading = false, onBack, onNext, onCancel }: Props) {
   const vat = Math.round(VALA_FEE * VAT_RATE);
   const feeTotal = VALA_FEE + vat;
   const netAmount = amount - feeTotal;
@@ -44,7 +45,7 @@ export default function PaymentDetailsScreen({ amount, onBack, onNext, onCancel 
 
         <View className="flex-row gap-4">
           <View className="flex-1">
-            <Button label="Next" onPress={onNext} />
+            <Button label={isLoading ? 'Processing...' : 'Next'} onPress={onNext} disabled={isLoading} />
           </View>
           <View className="flex-1">
             <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} />

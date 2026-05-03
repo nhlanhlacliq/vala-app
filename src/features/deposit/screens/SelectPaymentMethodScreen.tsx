@@ -4,7 +4,7 @@ import { CreditCard } from 'lucide-react-native';
 import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
 import Button from '@/components/Button/Button';
 
-type Method = 'card' | 'eft' | 'third-party';
+export type Method = 'card' | 'eft' | 'third-party';
 
 type Props = {
   onBack: () => void;
@@ -12,30 +12,47 @@ type Props = {
   onCancel: () => void;
 };
 
+type LogoBadge = {
+  label: string;
+  bg: string;
+  text: string;
+};
+
 type MethodOption = {
   id: Method;
   title: string;
   description?: string;
-  logos: string[];
+  logos: LogoBadge[];
 };
 
 const METHODS: MethodOption[] = [
   {
     id: 'card',
     title: 'Debit/Credit card',
-    logos: ['Mastercard', 'VISA'],
+    logos: [
+      { label: 'MASTERCARD', bg: '#EB001B', text: '#fff' },
+      { label: 'VISA', bg: '#1A1F71', text: '#fff' },
+    ],
   },
   {
     id: 'eft',
     title: 'Instant EFT',
-    logos: ['OZOW', 'instantEFT by Payflex'],
+    logos: [
+      { label: 'OZOW', bg: '#00C2CB', text: '#fff' },
+      { label: 'instantEFT', bg: '#F5A623', text: '#fff' },
+    ],
   },
   {
     id: 'third-party',
     title: 'Deposit at 3rd Party service provider',
-    logos: ['Checkers', 'Shoprite', 'PnP', 'Boxer'],
+    logos: [
+      { label: 'Checkers', bg: '#E30613', text: '#fff' },
+      { label: 'Shoprite', bg: '#E30613', text: '#fff' },
+      { label: 'PnP', bg: '#007A3D', text: '#fff' },
+      { label: 'Boxer', bg: '#FF6600', text: '#fff' },
+    ],
     description:
-      'To deposit at a 3rd party service provider, ensure you bring your South African National identity document (not a driver\'s licence) for identification purposes.',
+      "To deposit at a 3rd party service provider, ensure you bring your South African National identity document (not a driver's licence) for identification purposes. You will be required to supply your ID number and account number.",
   },
 ];
 
@@ -56,14 +73,20 @@ export default function SelectPaymentMethodScreen({ onBack, onNext, onCancel }: 
               activeOpacity={0.75}
               className="border border-gray-200 rounded-2xl px-4 py-5"
             >
-              <View className="flex-row items-center gap-3 mb-2">
+              <View className="flex-row items-center gap-3 mb-3">
                 <CreditCard size={18} color="#22d3ee" />
                 <Text className="text-gray-900 font-semibold text-base">{method.title}</Text>
               </View>
               <View className="flex-row flex-wrap gap-2 pl-7">
                 {method.logos.map(logo => (
-                  <View key={logo} className="bg-gray-100 rounded px-2 py-1">
-                    <Text className="text-gray-600 text-xs font-medium">{logo}</Text>
+                  <View
+                    key={logo.label}
+                    className="rounded px-3 py-1"
+                    style={{ backgroundColor: logo.bg }}
+                  >
+                    <Text className="text-xs font-bold" style={{ color: logo.text }}>
+                      {logo.label}
+                    </Text>
                   </View>
                 ))}
               </View>

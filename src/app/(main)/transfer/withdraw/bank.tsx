@@ -13,7 +13,7 @@ export default function WithdrawBankRoute() {
           params: { ...params, bankId: bank.id, bankName: bank.name, bankLast4: bank.last4 },
         })
       }
-      onCancel={() => router.dismissTo('/(main)/home')}
+      onCancel={() => router.navigate('/(main)/home')}
     />
   );
 }

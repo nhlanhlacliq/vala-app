@@ -5,7 +5,7 @@ export default function TransferConfirmationRoute() {
   return (
     <TransferConfirmationScreen
       onBack={() => router.back()}
-      onComplete={() => router.dismissTo('/(main)/home')}
+      onComplete={() => router.navigate('/(main)/home')}
     />
   );
 }

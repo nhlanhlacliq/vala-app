@@ -5,7 +5,7 @@ export default function DepositConfirmationRoute() {
   return (
     <PaymentConfirmationScreen
       onBack={() => router.back()}
-      onComplete={() => router.dismissTo('/(main)/home')}
+      onComplete={() => router.navigate('/(main)/home')}
       onTransferToWallet={() => router.push('/(main)/transfer/from-to')}
     />
   );

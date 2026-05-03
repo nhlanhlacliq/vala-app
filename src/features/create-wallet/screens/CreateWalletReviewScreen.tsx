@@ -6,12 +6,13 @@ import { type WalletGoal } from './CreateWalletGoalScreen';
 
 type Props = {
   goal: WalletGoal;
+  isLoading?: boolean;
   onBack: () => void;
   onNext: () => void;
   onCancel: () => void;
 };
 
-export default function CreateWalletReviewScreen({ goal, onBack, onNext, onCancel }: Props) {
+export default function CreateWalletReviewScreen({ goal, isLoading = false, onBack, onNext, onCancel }: Props) {
   const today = new Date().toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const rows: [string, string][] = [
@@ -37,7 +38,7 @@ export default function CreateWalletReviewScreen({ goal, onBack, onNext, onCance
 
         <View className="flex-row gap-4">
           <View className="flex-1">
-            <Button label="Next" onPress={onNext} />
+            <Button label={isLoading ? 'Creating...' : 'Next'} onPress={onNext} disabled={isLoading} />
           </View>
           <View className="flex-1">
             <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} />

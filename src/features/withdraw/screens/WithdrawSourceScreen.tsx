@@ -11,21 +11,14 @@ export type WithdrawSource = {
   type: 'wallet' | 'savings';
 };
 
-const SOURCES: WithdrawSource[] = [
-  { id: 'savings', name: 'Savings account', balance: 6140, type: 'savings' },
-  { id: '1', name: "Parent's house", balance: 3400, type: 'wallet' },
-  { id: '2', name: "Kid's stationary", balance: 850, type: 'wallet' },
-  { id: '3', name: 'Car maintenance', balance: 1890, type: 'wallet' },
-  { id: '4', name: 'New Wheels', balance: 0, type: 'wallet' },
-];
-
 type Props = {
+  sources: WithdrawSource[];
   onBack: () => void;
   onNext: (source: WithdrawSource) => void;
   onCancel: () => void;
 };
 
-export default function WithdrawSourceScreen({ onBack, onNext, onCancel }: Props) {
+export default function WithdrawSourceScreen({ sources, onBack, onNext, onCancel }: Props) {
   return (
     <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
       <ScreenHeader onBack={onBack} />
@@ -35,7 +28,7 @@ export default function WithdrawSourceScreen({ onBack, onNext, onCancel }: Props
         </Text>
 
         <View className="gap-3 mb-8">
-          {SOURCES.map(source => (
+          {sources.map(source => (
             <TouchableOpacity
               key={source.id}
               onPress={() => onNext(source)}

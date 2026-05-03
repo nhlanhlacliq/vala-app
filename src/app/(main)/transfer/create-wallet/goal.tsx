@@ -15,7 +15,7 @@ export default function CreateWalletGoalRoute() {
           },
         })
       }
-      onCancel={() => router.dismissTo('/(main)/home')}
+      onCancel={() => router.navigate('/(main)/home')}
     />
   );
 }

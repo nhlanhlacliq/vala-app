@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft } from 'lucide-react-native';
-import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
+import Input from '@/components/Input/Input';
+import { ArrowLeft } from 'lucide-react-native';
+import { useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = {
   onBack: () => void;
   onSignUp: (data: SignUpData) => void;
+  isLoading?: boolean;
 };
 
 export type SignUpData = {
@@ -20,7 +21,7 @@ export type SignUpData = {
   agreedToTerms: boolean;
 };
 
-export default function SignUpScreen({ onBack, onSignUp }: Props) {
+export default function SignUpScreen({ onBack, onSignUp, isLoading = false }: Props) {
   const [form, setForm] = useState<SignUpData>({
     firstName: '',
     lastName: '',
@@ -47,7 +48,7 @@ export default function SignUpScreen({ onBack, onSignUp }: Props) {
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView
         className="flex-1"
-        contentContainerClassName="px-6 pb-10 min-h-full"
+        contentContainerClassName="px-6 min-h-screen pb-20"
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         {/* Header */}
@@ -130,9 +131,9 @@ export default function SignUpScreen({ onBack, onSignUp }: Props) {
         </TouchableOpacity>
 
         <Button
-          label="Sign Up"
+          label={isLoading ? 'Signing up...' : 'Sign Up'}
           onPress={() => onSignUp(form)}
-          disabled={!canSubmit}
+          disabled={!canSubmit || isLoading}
           fullWidth={false}
           className="mt-auto self-end"
         />
