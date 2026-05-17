@@ -1,11 +1,11 @@
 import QuickActionsSheet from '@/features/home/components/QuickActionsSheet';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Tabs, router } from 'expo-router';
-import { ArrowLeftRight, Home, Settings } from 'lucide-react-native';
+import { Home, Settings } from 'lucide-react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 const HIDDEN_SCREENS = [
-  'home/[walletId]',
   'transfer/from-to',
   'transfer/transfer-details',
   'transfer/transfer-confirmation',
@@ -52,14 +52,14 @@ export default function MainTabsLayout() {
         }}
       >
         <Tabs.Screen
-          name="home/index"
+          name="home"
           options={{ title: 'Home', tabBarIcon: ({ color }) => <Home size={20} color={color} /> }}
         />
         <Tabs.Screen
           name="transfer/index"
           options={{
             title: 'Transact',
-            tabBarIcon: ({ color }) => <ArrowLeftRight size={20} color={color} />,
+            tabBarIcon: ({ color }) => <MaterialIcons name="compare-arrows" size={24} color={color} />,
             tabBarButton: (props) => (
               <TouchableOpacity {...props} onPress={() => setSheetVisible(true)} />
             ),

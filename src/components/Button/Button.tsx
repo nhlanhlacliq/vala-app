@@ -39,7 +39,6 @@ export default function Button({
     outline: 'text-gray-900 font-semibold text-[16px]',
     ghost: 'text-gray-500 text-[16px]',
   };
-
   const iconColor: Record<Variant, string> = {
     primary: disabled ? 'gray' : 'white',
     outline: 'black',

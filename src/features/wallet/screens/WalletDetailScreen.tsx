@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Wallet, MoreVertical } from 'lucide-react-native';
-import TransactionItem, { type Transaction } from '../components/TransactionItem';
 import Button from '@/components/Button/Button';
+import { ArrowLeft, MoreVertical, Wallet } from 'lucide-react-native';
+import { useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import TransactionItem, { type Transaction } from '../components/TransactionItem';
 
 type FilterTab = 'All' | 'Money in' | 'Money out';
 
@@ -42,12 +42,15 @@ export default function WalletDetailScreen({ walletId, walletName, balance, onBa
   })).filter(g => g.txs.length > 0);
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-gray-100" edges={['top']}>
       {/* Header */}
       <View className="flex-row items-center justify-between px-5 py-4">
         <TouchableOpacity onPress={onBack} hitSlop={8}>
           <ArrowLeft size={22} color="#111" />
         </TouchableOpacity>
+      </View>
+
+      <View className="flex-row items-center justify-between px-5 py-4">
         <View className="flex-row items-center gap-2">
           <Wallet size={16} color="#9CA3AF" />
           <Text className="text-base font-semibold text-gray-900">{walletName}</Text>
@@ -57,23 +60,23 @@ export default function WalletDetailScreen({ walletId, walletName, balance, onBa
         </TouchableOpacity>
       </View>
 
-      <ScrollView className="flex-1" contentContainerClassName="px-5 pb-32" showsVerticalScrollIndicator={false}>
+      <ScrollView className="flex-1" contentContainerClassName="px-5 pb-32 gap-4" showsVerticalScrollIndicator={false}>
         {/* Balance */}
-        <Text className="text-4xl font-bold text-gray-900 mt-4 mb-6">
+        <Text className="text-4xl font-bold text-gray-900 mt-4 mb-2 bg-white p-4">
           R{balance.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}
         </Text>
 
-        <Button label="Deposit into wallet" onPress={onDeposit} />
+        <Button label="Deposit into wallet" onPress={onDeposit} fullWidth={false} className='ml-auto gap-3' />
 
         {/* Filter tabs */}
-        <View className="flex-row bg-gray-100 rounded-full p-1 mt-8 mb-4">
+        <View className="flex-row bg-gray-200 mt-8 mb-4">
           {tabs.map(tab => (
             <TouchableOpacity
               key={tab}
               onPress={() => setActiveTab(tab)}
-              className={`flex-1 py-2 rounded-full items-center ${activeTab === tab ? 'bg-cyan-400' : ''}`}
+              className={`flex-1 py-4 items-center ${activeTab === tab ? 'bg-cyan-400' : ''}`}
             >
-              <Text className={`text-sm font-medium ${activeTab === tab ? 'text-white' : 'text-gray-500'}`}>
+              <Text className={`text-sm font-medium ${activeTab === tab ? 'text-white' : ''}`}>
                 {tab}
               </Text>
             </TouchableOpacity>
@@ -81,14 +84,16 @@ export default function WalletDetailScreen({ walletId, walletName, balance, onBa
         </View>
 
         {/* Transactions grouped by date */}
+        <View className='gap-2'>
         {filteredGroups.map(({ date, txs }) => (
           <View key={date} className="mb-2">
-            <Text className="text-xs font-semibold text-gray-400 uppercase mb-1">{date}</Text>
+            <Text className="text-xs text-gray-900 mb-1">{date}</Text>
             {txs.map(tx => (
               <TransactionItem key={tx.id} transaction={tx} />
             ))}
           </View>
         ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
