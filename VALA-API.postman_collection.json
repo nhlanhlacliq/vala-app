@@ -1,0 +1,247 @@
+{
+  "info": {
+    "_postman_id": "8adcccee-3a7a-41b9-803f-525cc1251301",
+    "name": "VALA-API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20162452"
+  },
+  "item": [
+    {
+      "name": "DEV",
+      "item": [
+        {
+          "name": "Health",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/health",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CreateUser",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Root-Password",
+                "value": "secret123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"idOrPassport\": \"9902215531084\",\n\t\"username\": \"0731234567\",\n\t\"email\": \"dev@vala.co.za\",\n\t\"termsAccepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/register",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "CreateWallet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Root-Password",
+                "value": "secret123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"userId\": \"3564178\",\n\t\"name\": \"Balloon Payment\",\n\t\"description\": \"Short Fall Cover for my car Balloon\",\n\t\"targetAmount\": 110000.00\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/wallets",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "wallets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FetchUserWallets",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Root-Password",
+                "value": "secret123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/wallets/3564178",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "wallets",
+                "3564178"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FundWallet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Root-Password",
+                "value": "secret123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"currency\": \"R\",\n\t\"amount\": 1400.0,\n\t\"fromAccountId\": \"62323323231\",\n\t\"walletId\": \"AD4657A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/fund/AD4657A",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "fund",
+                "AD4657A"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "WithdrawFromWallet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Root-Password",
+                "value": "secret123",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"currency\": \"R\",\n\t\"amount\": 1200.0,\n\t\"toAccountId\": \"62323323231\",\n\t\"walletId\": \"AD4657A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://dev.vala.apiservices.co.za/api/v1/withdraw/AD4657A",
+              "protocol": "https",
+              "host": [
+                "dev",
+                "vala",
+                "apiservices",
+                "co",
+                "za"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "withdraw",
+                "AD4657A"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

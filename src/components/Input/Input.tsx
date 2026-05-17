@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { View, TextInput, TouchableOpacity, KeyboardTypeOptions } from 'react-native';
 import { Eye, EyeOff } from 'lucide-react-native';
+import { useState } from 'react';
+import { KeyboardTypeOptions, TextInput, TouchableOpacity, View } from 'react-native';
 
 type Props = {
   placeholder: string;
@@ -26,7 +26,7 @@ export default function Input({
   return (
     <View className="flex-row items-center rounded-xl border border-gray-200 bg-white px-4 py-1">
       <TextInput
-        className="flex-1 text-[15px] text-gray-900"
+        className="flex-1 text-[15px] text-gray-900 min-h-[33px]"
         placeholder={placeholder}
         placeholderTextColor="#9CA3AF"
         value={value}

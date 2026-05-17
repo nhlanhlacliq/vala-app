@@ -1,5 +1,6 @@
 import Button from '@/components/Button/Button';
 import ValaLogo from '@/components/ValaLogo/ValaLogo';
+import { getIcon } from '@/utils/getIcon';
 import { Bell, Eye, EyeOff, X } from 'lucide-react-native';
 import { useState } from 'react';
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -77,7 +78,7 @@ export default function HomeScreen({
 
         {/* My Wallets */}
         <View className="flex-row items-center justify-between mb-4">
-          <Text className="text-lg font-semibold text-gray-900">My Wallets</Text>
+          <Text className="text-[22px] leading-[28px]">My Wallets</Text>
           <TouchableOpacity onPress={() => setWalletsHidden(h => !h)} hitSlop={8}>
             {walletsHidden ? <Eye size={18} color="#9CA3AF" /> : <EyeOff size={18} color="#9CA3AF" />}
           </TouchableOpacity>
@@ -93,8 +94,11 @@ export default function HomeScreen({
               ))}
             </View>
           ) : (
-            <View className="bg-white rounded-2xl border border-gray-200 px-5 py-8 mb-4">
-              <Text className="text-gray-500 text-base text-center leading-6">
+            <View className="flex-row gap-4 bg-white rounded-2xl border border-gray-200 px-5 py-8 mb-4">
+              <View className='opacity-60'>
+                {getIcon("wallet")}
+              </View>
+              <Text className="opacity-60 leading-6">
                 Wallets are a way to categorise your savings. Create a new wallet and start saving.
               </Text>
             </View>

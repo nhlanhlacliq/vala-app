@@ -45,7 +45,7 @@ export default function SignUpScreen({ onBack, onSignUp, isLoading = false }: Pr
     form.agreedToTerms;
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
       <ScrollView
         className="flex-1"
         contentContainerClassName="px-6 min-h-screen pb-20"
@@ -57,12 +57,12 @@ export default function SignUpScreen({ onBack, onSignUp, isLoading = false }: Pr
         </TouchableOpacity>
 
         <Text className="mb-2 text-3xl font-bold text-gray-900">Create your Vala account</Text>
-        <Text className="mb-8 text-base text-gray-500">
+        <Text className="mb-8">
           Create an account so you can manage your money even faster
         </Text>
 
         {/* Form fields */}
-        <View className="gap-4">
+        <View className="gap-5">
           <Input
             placeholder="First Name"
             value={form.firstName}
@@ -119,11 +119,11 @@ export default function SignUpScreen({ onBack, onSignUp, isLoading = false }: Pr
             }`}>
             {form.agreedToTerms && <Text className="text-xs font-bold text-white">✓</Text>}
           </View>
-          <View className="flex-1">
-            <Text className="text-sm leading-5 text-gray-700">
+          <View className="flex-1 gap-2">
+            <Text className="leading-5 ">
               I'm at least 18 years old and agree to the following terms:
             </Text>
-            <Text className="mt-1 text-sm leading-5 text-gray-700">
+            <Text className="leading-5 ">
               By clicking here, I have read and agree to the{' '}
               <Text className="font-bold">Terms and Conditions</Text>
             </Text>

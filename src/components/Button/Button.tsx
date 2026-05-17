@@ -1,5 +1,5 @@
-import { TouchableOpacity, Text, View } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 type Variant = 'primary' | 'outline' | 'ghost';
 
@@ -24,7 +24,7 @@ export default function Button({
   fullWidth = true,
   className,
 }: Props) {
-  const base = `rounded-full flex-row items-center px-6 py-2 text-[16px] ${fullWidth ? 'justify-between' : 'gap-10 self-start'}`;
+  const base = `rounded-full flex-row h-[44px] items-center px-6 py-2 text-[16px] ${fullWidth ? 'justify-between' : 'gap-10 self-start'}`;
 
   const variantClasses: Record<Variant, string> = {
     primary: disabled ? 'bg-gray-300' : 'bg-cyan-400',
