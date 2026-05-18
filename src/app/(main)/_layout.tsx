@@ -1,8 +1,9 @@
 import QuickActionsSheet from '@/features/home/components/QuickActionsSheet';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Tabs, router } from 'expo-router';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { Tabs, router, usePathname } from 'expo-router';
 import { Home, Settings } from 'lucide-react-native';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 const HIDDEN_SCREENS = [
@@ -25,7 +26,10 @@ const HIDDEN_SCREENS = [
 ];
 
 export default function MainTabsLayout() {
-  const [sheetVisible, setSheetVisible] = useState(false);
+  const sheetRef = useRef<BottomSheet>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const pathname = usePathname();
+  const isTransactActive = sheetOpen || pathname.startsWith('/transfer');
 
   return (
     <>
@@ -59,9 +63,15 @@ export default function MainTabsLayout() {
           name="transfer/index"
           options={{
             title: 'Transact',
-            tabBarIcon: ({ color }) => <MaterialIcons name="compare-arrows" size={24} color={color} />,
+            tabBarActiveTintColor: isTransactActive ? '#22d3ee' : '#ffffff',
+            tabBarLabelStyle: { fontSize: 11, marginBottom: 6, color: isTransactActive ? '#22d3ee' : '#ffffff' },
+            tabBarIcon: ({ color }) => <MaterialIcons name="compare-arrows" size={24} color={isTransactActive ? '#22d3ee' : color} />,
             tabBarButton: (props) => (
-              <TouchableOpacity {...props} onPress={() => setSheetVisible(true)} />
+              <TouchableOpacity
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                {...(props as any)}
+                onPress={() => sheetRef.current?.expand()}
+              />
             ),
           }}
         />
@@ -76,12 +86,13 @@ export default function MainTabsLayout() {
       </Tabs>
 
       <QuickActionsSheet
-        visible={sheetVisible}
-        onClose={() => setSheetVisible(false)}
-        onAddMoney={() => { setSheetVisible(false); router.push('/(main)/transfer/deposit/amount'); }}
-        onAddWallet={() => { setSheetVisible(false); router.push('/(main)/transfer/create-wallet/intro'); }}
-        onTransfer={() => { setSheetVisible(false); router.push('/(main)/transfer/from-to'); }}
-        onWithdraw={() => { setSheetVisible(false); router.push('/(main)/transfer/withdraw/source'); }}
+        ref={sheetRef}
+        onOpen={() => setSheetOpen(true)}
+        onClose={() => setSheetOpen(false)}
+        onAddMoney={() => { sheetRef.current?.close(); router.push('/(main)/transfer/deposit/amount'); }}
+        onAddWallet={() => { sheetRef.current?.close(); router.push('/(main)/transfer/create-wallet/intro'); }}
+        onTransfer={() => { sheetRef.current?.close(); router.push('/(main)/transfer/from-to'); }}
+        onWithdraw={() => { sheetRef.current?.close(); router.push('/(main)/transfer/withdraw/source'); }}
         canWithdraw
       />
     </>
