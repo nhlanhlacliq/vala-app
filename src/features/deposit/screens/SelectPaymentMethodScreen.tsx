@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { CreditCard } from 'lucide-react-native';
-import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
 import Button from '@/components/Button/Button';
+import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
+import { CreditCard } from 'lucide-react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type Method = 'card' | 'eft' | 'third-party';
 
