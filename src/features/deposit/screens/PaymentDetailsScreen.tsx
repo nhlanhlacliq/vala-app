@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
 import Button from '@/components/Button/Button';
+import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
+import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = {
   amount: number;
@@ -30,26 +30,26 @@ export default function PaymentDetailsScreen({ amount, isLoading = false, onBack
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
-      <ScreenHeader onBack={onBack} title="Payment Details" />
+    <SafeAreaView className="flex-1 bg-gray-100" edges={['top', 'bottom']}>
+      <ScreenHeader onBack={onBack} />
 
       <View className="flex-1 px-6 pt-2">
-        <View className="gap-4 mb-10">
+        <Text className="text-2xl mb-8">
+          Payment Details
+        </Text>
+
+        <View className="gap-4 mb-10 bg-white p-4 py-6">
           {rows.map(([label, value, bold]) => (
             <View key={label} className="flex-row justify-between">
-              <Text className="text-gray-500 text-sm flex-1">{label}</Text>
-              <Text className={`text-sm ${bold ? 'font-bold text-gray-900' : 'text-gray-900'}`}>{value}</Text>
+              <Text className="flex-1">{label}</Text>
+              <Text className={`font-bold`}>{value}</Text>
             </View>
           ))}
         </View>
 
-        <View className="flex-row gap-4">
-          <View className="flex-1">
-            <Button label={isLoading ? 'Processing...' : 'Next'} onPress={onNext} disabled={isLoading} />
-          </View>
-          <View className="flex-1">
-            <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} />
-          </View>
+        <View className="flex-row gap-4 ml-auto">
+            <Button label={isLoading ? 'Processing...' : 'Next'} onPress={onNext} disabled={isLoading} fullWidth={false}/>
+            <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} fullWidth={false}/>
         </View>
       </View>
     </SafeAreaView>

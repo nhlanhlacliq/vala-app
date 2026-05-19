@@ -1,8 +1,10 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { CreditCard, Plus } from 'lucide-react-native';
-import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
 import Button from '@/components/Button/Button';
+import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
+import { CreditCard } from 'lucide-react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import MastercardLogo from '../../../../assets/logos/Mastercard-logo.svg';
+import VisaLogo from '../../../../assets/logos/visa-logo-3.svg';
 
 export type BankAccount = {
   id: string;
@@ -22,11 +24,11 @@ type Props = {
 
 export default function WithdrawBankScreen({ onBack, onNext, onCancel }: Props) {
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
+    <SafeAreaView className="flex-1 bg-gray-100" edges={['top', 'bottom']}>
       <ScreenHeader onBack={onBack} />
 
       <View className="flex-1 px-6 pt-4">
-        <Text className="text-xl font-bold text-gray-900 mb-6">
+        <Text className="text-2xl mb-6">
           Please confirm the bank account you want to deposit the funds to
         </Text>
 
@@ -36,19 +38,27 @@ export default function WithdrawBankScreen({ onBack, onNext, onCancel }: Props) 
               key={account.id}
               onPress={() => onNext(account)}
               activeOpacity={0.7}
-              className="flex-row items-center gap-3 border border-gray-200 rounded-xl px-4 py-4"
+              className="flex-row items-center gap-3 bg-white rounded-xl px-4 py-4"
             >
               <CreditCard size={18} color="#22d3ee" />
-              <Text className="text-gray-900 font-medium">{account.name} {account.last4}...</Text>
+              <Text className="">{account.name} {account.last4}...</Text>
             </TouchableOpacity>
           ))}
 
           <TouchableOpacity
             activeOpacity={0.7}
-            className="flex-row items-center gap-3 border border-gray-200 rounded-xl px-4 py-4"
+            className="flex-row items-center gap-3 bg-white rounded-xl px-4 py-4"
           >
-            <Plus size={18} color="#9CA3AF" />
+            <View className='mb-auto mt-0.5'>
+              <CreditCard size={18} color="#22d3ee" />
+            </View>
+            <View>
             <Text className="text-gray-500">Add new debit/credit card</Text>
+              <View className='flex-row gap-4 items-center'>
+              <MastercardLogo width={32} height={24} />
+              <VisaLogo width={40} height={32} />
+              </View>
+            </View>
           </TouchableOpacity>
         </View>
 

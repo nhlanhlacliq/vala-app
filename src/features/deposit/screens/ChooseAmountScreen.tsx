@@ -17,7 +17,7 @@ export default function ChooseAmountScreen({ onBack, onNext, onCancel }: Props) 
   const isValid = !isNaN(parsed) && parsed > 0;
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top', 'bottom']}>
+    <SafeAreaView className="flex-1 " edges={['top', 'bottom']}>
       <ScreenHeader onBack={onBack} />
 
       <View className="flex-1 px-6 pt-4">

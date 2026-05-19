@@ -17,7 +17,7 @@ export default function TransferFromToRoute() {
     <TransferSelectScreen
       wallets={wallets}
       onBack={() => router.back()}
-      onNext={(from, to) =>
+      onNext={(from, to, amount) =>
         router.push({
           pathname: '/(main)/transfer/transfer-details',
           params: {
@@ -27,6 +27,7 @@ export default function TransferFromToRoute() {
             toId: to.id,
             toName: to.name,
             toBalance: String(to.balance),
+            amount: String(amount),
           },
         })
       }

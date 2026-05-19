@@ -20,7 +20,7 @@ export default function SavingsCard({ total, accountNumber = '123 123 123 34' }:
       </View>
       {/* <Text className="text-gray-400 text-sm mb-3">Account {accountNumber}</Text> */}
 
-      <View className="bg-white rounded-2xl border border-gray-200 px-5 py-5">
+      <View className="bg-white rounded-2xl px-5 py-5">
         <Text className="text-4xl font-bold ">
           {hidden ? '••••••' : `R${total.toLocaleString('en-ZA', { minimumFractionDigits: 2 })}`}
         </Text>

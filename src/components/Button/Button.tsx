@@ -1,4 +1,4 @@
-import Feather from '@expo/vector-icons/Feather';
+import { getIcon } from '@/utils/getIcon';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 type Variant = 'primary' | 'outline' | 'ghost';
@@ -53,7 +53,7 @@ export default function Button({
       className={`${base} ${variantClasses[variant]} ${className || ''}`}>
       {icon && <View className="mr-1">{icon}</View>}
       <Text className={textClasses[variant]}>{label}</Text>
-      {showArrow && <Feather name="arrow-right" size={22} color={iconColor[variant]} />}
+      {showArrow && <View className="ml-1">{getIcon("arrow-r-long", 18, iconColor[variant])}</View>}
     </TouchableOpacity>
   );
 }

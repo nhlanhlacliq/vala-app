@@ -1,5 +1,5 @@
-import { View, Text } from 'react-native';
 import Button from '@/components/Button/Button';
+import { Text, View } from 'react-native';
 
 type Action = {
   label: string;
@@ -15,20 +15,21 @@ type Props = {
 
 export default function ConfirmationView({ message, icon, primaryAction, secondaryAction }: Props) {
   return (
-    <View className="flex-1 items-center justify-center px-8 gap-8">
-      <View className="items-center gap-6">
+    <View className="gap-8">
+      <View className="items-center justify-center p-8 gap-8 bg-white">
+        <Text className="leading-6">{message}</Text>
         <View className="items-center justify-center">{icon}</View>
-        <Text className="text-center text-base text-gray-700 leading-6">{message}</Text>
       </View>
 
-      <View className="w-full gap-3">
-        <Button label={primaryAction.label} onPress={primaryAction.onPress} />
+      <View className="mt-2 flex-row gap-3 ml-auto">
+        <Button label={primaryAction.label} onPress={primaryAction.onPress} className='gap-4' fullWidth={false}/>
         {secondaryAction && (
           <Button
             label={secondaryAction.label}
             onPress={secondaryAction.onPress}
             variant="ghost"
             showArrow={false}
+            fullWidth={false}
           />
         )}
       </View>

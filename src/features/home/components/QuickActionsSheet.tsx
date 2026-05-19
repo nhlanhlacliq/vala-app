@@ -50,8 +50,7 @@ const QuickActionsSheet = forwardRef<BottomSheet, Props>(function QuickActionsSh
       icon: <ArrowDownToLine size={18} color={canWithdraw ? '#fff' : '#9CA3AF'} />,
       label: 'Withdraw',
       onPress: canWithdraw ? onWithdraw : undefined,
-      // disabled: !canWithdraw,
-      disabled: true,
+      disabled: !canWithdraw,
     },
   ];
 

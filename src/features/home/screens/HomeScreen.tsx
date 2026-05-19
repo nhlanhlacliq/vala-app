@@ -3,7 +3,7 @@ import ValaLogo from '@/components/ValaLogo/ValaLogo';
 import { getIcon } from '@/utils/getIcon';
 import { Bell, Eye, EyeOff, X } from 'lucide-react-native';
 import { useState } from 'react';
-import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SavingsCard from '../components/SavingsCard';
 import WalletListItem, { type Wallet } from '../components/WalletListItem';
@@ -63,15 +63,21 @@ export default function HomeScreen({
 
         {/* Notification banners */}
         {notifications.map((message, index) => (
-          <View
+          <ImageBackground
             key={index}
-            className="flex-row items-center justify-between bg-cyan-400 rounded-2xl px-4 py-3 mb-4"
+            source={require('../../../../assets/Mask group.png')}
+            className="rounded-lg mb-4 overflow-hidden"
+            style={{ backgroundColor: '#22d3ee' }}
+            imageStyle={{ position: 'absolute', left: 11, right: 0, top: 0, width: 365, height: 77, opacity: 0.9 }}
+            resizeMode="cover"
           >
-            <Text className="text-white text-sm font-medium flex-1">{message}</Text>
-            <TouchableOpacity onPress={() => dismissNotification(index)} hitSlop={8} className="ml-3">
-              <X size={16} color="#fff" />
-            </TouchableOpacity>
-          </View>
+            <View className="flex-row items-center justify-between px-4 py-8">
+              <Text className="text-white font-semibold flex-1 tracking-[0.75px]">{message}</Text>
+              <TouchableOpacity onPress={() => dismissNotification(index)} hitSlop={8} className="ml-3">
+                <X size={16} color="#fff" />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
         ))}
 
         <SavingsCard total={savingsTotal} accountNumber={accountNumber} />

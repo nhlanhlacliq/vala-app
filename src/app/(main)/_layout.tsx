@@ -10,6 +10,7 @@ const HIDDEN_SCREENS = [
   'transfer/from-to',
   'transfer/transfer-details',
   'transfer/transfer-confirmation',
+  'transfer/deposit/select-wallet',
   'transfer/deposit/amount',
   'transfer/deposit/method',
   'transfer/deposit/details',
@@ -89,7 +90,7 @@ export default function MainTabsLayout() {
         ref={sheetRef}
         onOpen={() => setSheetOpen(true)}
         onClose={() => setSheetOpen(false)}
-        onAddMoney={() => { sheetRef.current?.close(); router.push('/(main)/transfer/deposit/amount'); }}
+        onAddMoney={() => { sheetRef.current?.close(); router.push('/(main)/transfer/deposit/select-wallet'); }}
         onAddWallet={() => { sheetRef.current?.close(); router.push('/(main)/transfer/create-wallet/intro'); }}
         onTransfer={() => { sheetRef.current?.close(); router.push('/(main)/transfer/from-to'); }}
         onWithdraw={() => { sheetRef.current?.close(); router.push('/(main)/transfer/withdraw/source'); }}

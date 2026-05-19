@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
-import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
+import Input from '@/components/Input/Input';
+import ScreenHeader from '@/components/ScreenHeader/ScreenHeader';
+import { useState } from 'react';
+import { Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type WalletGoal = {
   savingsGoal: string;
@@ -43,7 +43,7 @@ export default function CreateWalletGoalScreen({ onBack, onNext, onCancel }: Pro
 
         <View className="gap-6 mb-10">
           <View>
-            <Text className="text-gray-700 font-medium mb-2">What are you saving towards?</Text>
+            <Text className="font-medium mb-2">What are you saving towards?</Text>
             <Input
               placeholder="Choose savings goal"
               value={savingsGoal}
@@ -53,7 +53,7 @@ export default function CreateWalletGoalScreen({ onBack, onNext, onCancel }: Pro
           </View>
 
           <View>
-            <Text className="text-gray-700 font-medium mb-2">What is your savings target amount?</Text>
+            <Text className="font-medium mb-2">What is your savings target amount?</Text>
             <View className="flex-row items-center border border-gray-200 rounded-xl px-4 py-3.5">
               <Text className="text-gray-400 text-base mr-2">R</Text>
               <TextInput
@@ -68,7 +68,7 @@ export default function CreateWalletGoalScreen({ onBack, onNext, onCancel }: Pro
           </View>
 
           <View>
-            <Text className="text-gray-700 font-medium mb-2">Choose a name for your new VALA wallet</Text>
+            <Text className=" font-medium mb-2">Choose a name for your new VALA wallet</Text>
             <Input
               placeholder="Complete"
               value={walletName}
@@ -78,13 +78,9 @@ export default function CreateWalletGoalScreen({ onBack, onNext, onCancel }: Pro
           </View>
         </View>
 
-        <View className="flex-row gap-4">
-          <View className="flex-1">
-            <Button label="Next" onPress={() => onNext({ savingsGoal, targetAmount: parsed, walletName })} disabled={!canProceed} />
-          </View>
-          <View className="flex-1">
+        <View className="flex-row gap-4 ml-auto">
+            <Button label="Next" onPress={() => onNext({ savingsGoal, targetAmount: parsed, walletName })} disabled={!canProceed} className='gap-6' />
             <Button label="Cancel" onPress={onCancel} variant="ghost" showArrow={false} />
-          </View>
         </View>
       </View>
     </SafeAreaView>
